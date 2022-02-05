@@ -1,20 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
-
-# Configure the AWS Provider
-provider "aws" {
-  region     = var.aws_region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
-}
-
-
 # Create the main EC2 instance
 # https://www.terraform.io/docs/providers/aws/r/instance.html
 resource "aws_instance" "this" {
@@ -49,4 +32,9 @@ resource "aws_instance" "this" {
   provisioner "remote-exec" {
     script = "${path.module}/provision-docker.sh"
   }
+}
+
+resource "aws_eip" "this" {
+  instance = aws_instance.this.id
+  vpc      = true
 }

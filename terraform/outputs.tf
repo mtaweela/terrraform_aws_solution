@@ -8,6 +8,11 @@ output "public_ip" {
   value       = aws_instance.this.public_ip
 }
 
+output "elastic_ip" {
+  description = "Public IP address assigned to the host by EC2"
+  value       = aws_eip.this.public_ip
+}
+
 output "instance_id" {
   description = "AWS ID for the EC2 instance used"
   value       = aws_instance.this.id
