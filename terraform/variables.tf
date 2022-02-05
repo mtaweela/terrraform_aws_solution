@@ -15,11 +15,8 @@ variable "ec2_instance_type" {
   default     = "t2.micro"
 }
 
-variable "filename" {
-  description = "determine the type of the ec2 instance"
-  default     = "t2.micro"
+variable "media_bucket_name" {
+  description = "media bucket name"
 }
 
-variable "filenames" {
-  type = set(string)
-}
+variable "media_bucket_acl" {}
