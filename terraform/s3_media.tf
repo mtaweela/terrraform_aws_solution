@@ -10,10 +10,15 @@ resource "aws_s3_bucket" "media_bucket" {
     allowed_origins = ["*"]
     max_age_seconds = 3000
   }
+
+  # uncomment the next line if you want to destroy the bucket
+  # force_destroy = true 
+  lifecycle {
+  }
 }
 
 resource "aws_s3_bucket_policy" "media_bucket_policy" {
-  depends_on = ["aws_s3_bucket.media_bucket"] # because we refer to the bucket indirectly, we need to explicitly define the dependency
+  depends_on = [aws_s3_bucket.media_bucket]
   bucket     = var.media_bucket_name
 
   # https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-2
