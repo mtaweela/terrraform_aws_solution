@@ -30,7 +30,7 @@ resource "aws_instance" "this" {
   }
 
   provisioner "remote-exec" {
-    script = "${path.module}/provision-docker.sh"
+    script = "provision-docker.sh"
   }
 }
 
