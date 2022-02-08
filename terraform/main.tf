@@ -15,17 +15,10 @@ provider "aws" {
 }
 
 module "ec2_instance" {
+  count = 3
   source               = "./modules/ec2_instance"
   instance_type        = "t2.micro"
-  hostname             = "aws-ec2-ebs-docker-host"
-  allow_incoming_http  = true
-  allow_incoming_https = true
-}
-
-module "ec2_instance2" {
-  source               = "./modules/ec2_instance"
-  instance_type        = "t2.micro"
-  hostname             = "host2"
+  hostname             = "host${count.index}"
   allow_incoming_http  = true
   allow_incoming_https = true
 }
